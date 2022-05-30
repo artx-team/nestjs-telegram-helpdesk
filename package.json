@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -102,5 +102,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

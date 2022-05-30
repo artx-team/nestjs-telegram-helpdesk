@@ -6,6 +6,6 @@ WORKDIR $APP_DIR
 
 COPY . $APP_DIR
 
-RUN npm i
+RUN npm i --only=prod
 
 CMD ./start.sh
