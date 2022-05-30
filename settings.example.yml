@@ -1,0 +1,52 @@
+# database
+db:
+  host: "backend"
+  port: 5432
+  username: "postgres"
+  password: "postgres"
+  database: "telegram_helpdesk"
+
+# Redis for bull exchange; optional
+redis:
+  host: "localhost"
+  port: 6479
+
+# Bull queues for external process exchange; optional, required if "redis" is defined
+bull:
+  # sends a message when application starts
+  appQueue: "app-queue-name"
+
+  # listens to messages with support categories from external process
+  categoriesQueue: "cat-queue-name"
+
+# support bot token
+botToken: "YOUR_BOT_TOKEN"
+
+# eg. -123456789
+staffChatId: "SUPERGROUP_CHAT_ID"
+
+# Admin's telegram ID
+ownerId: "ADMIN_TELEGRAM_ID"
+
+# time (in MS) in which user may send {spamCantMsg} messages
+spamTime: 300_000
+spamCantMsg: 5
+
+# Allow / disallow option for staff to chat privately
+allowPrivate: false
+
+# Set this to true to just forward staff users to a user chat when allow_private
+directReply: false
+
+# Close tickets after answering
+autoCloseTickets: true
+
+# Include userid in tickets or not
+anonymousTickets: true
+
+categories:
+  - id: '100500'
+    name: 'Superchat'
+    groupId: '-100500'
+    isPublic: true
+

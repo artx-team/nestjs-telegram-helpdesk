@@ -1,0 +1,31 @@
+version: '3'
+services:
+  supportbot:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./settings.yml:/bot/settings.yml:ro
+    depends_on:
+      - postgres
+    networks:
+      - mynet
+
+  postgres:
+    hostname: postgres
+    image: postgres:14
+    environment:
+      POSTGRES_DB: telegram_helpdesk
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - njs_tg_hd_db_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    networks:
+      - mynet
+
+volumes:
+  njs_tg_hd_db_data:
+
+networks:
+  mynet:
