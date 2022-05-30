@@ -1,10 +1,20 @@
 {
   "name": "@artx/nestjs-telegram-helpdesk",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "private": false,
+  "description": "Telegram Helpdesk Bot",
+  "author": "kovalenko",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artxru/nestjs-telegram-helpdesk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artxru/nestjs-telegram-helpdesk/issues"
+  },
+  "main": "dist/main.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
