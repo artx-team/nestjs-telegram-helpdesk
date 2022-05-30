@@ -1,6 +1,6 @@
 {
   "name": "@artx/nestjs-telegram-helpdesk",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "private": true,
@@ -54,6 +54,7 @@
     "@nestjs/testing": "^8.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.4",
     "@semantic-release/npm": "^9.0.1",
     "@types/bull": "^3.15.8",
     "@types/jest": "27.5.0",
@@ -61,6 +62,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
