@@ -1,0 +1,15 @@
+no group selected: Не выбрана группа
+selected group: "Выбрана группа: <b>{name}</b>"
+stop spam: Остановите спам
+all open tickets closed: Все активные тикеты закрыты
+ticket from: >
+  Тикет {id} от {username} (язык: {lang})
+   
+  {message}
+Ticket id not found in message: ID тикета не найден в сообщении
+Ticket with id not found: Тикет {ticketId} не найден
+Ticket is ticketStatus, not status: Тикет в состоянии {ticketStatus}; ожидается {status}
+Public groups: >
+  Общедоступные группы:
+   
+  {links}
