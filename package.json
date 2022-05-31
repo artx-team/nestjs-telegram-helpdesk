@@ -1,5 +1,5 @@
 {
-  "name": "@artx/nestjs-telegram-helpdesk",
+  "name": "nestjs-telegram-helpdesk",
   "version": "1.0.0",
   "description": "Telegram Helpdesk Bot",
   "author": "kovalenko",
@@ -30,7 +30,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/orm.config.ts",
-    "typeorm:prod": "ts-node ./node_modules/typeorm/cli.js --config ./dist/orm.config.js",
+    "typeorm:prod": "node ./node_modules/typeorm/cli.js --config ./dist/orm.config.js",
     "migration:create": "npm run typeorm migration:create -- -n",
     "migration:generate": "npm run typeorm migration:generate -- -n",
     "migration:run": "npm run typeorm migration:run",
