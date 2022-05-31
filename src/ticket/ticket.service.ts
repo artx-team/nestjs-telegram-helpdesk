@@ -119,11 +119,13 @@ export class TicketService {
     } catch (e: unknown) {
       // send error message to staff chat
       if (e instanceof TelegramError) {
-        await this.bot.telegram.sendMessage(
+        this.bot.telegram.sendMessage(
           settings.staffChatId,
           e.message + '\n\n' + JSON.stringify(e.on, null, 2),
           {parse_mode: 'HTML'},
-        );
+        ).catch(e => {
+          console.log(e);
+        });
       } else {
         console.log(e);
       }

@@ -10,6 +10,7 @@ import {TicketService} from '@/ticket/ticket.service';
 import {plainToInstance} from 'class-transformer';
 import {SupportCategory} from '@/dto/support-category';
 import {Optional} from '@nestjs/common';
+import {validateSync} from 'class-validator';
 
 @Processor(settings.bull?.categoriesQueue)
 export class CategoriesProcessor {
@@ -22,7 +23,16 @@ export class CategoriesProcessor {
   @Process()
   async process(job: Job): Promise<void> {
     if (Array.isArray(job.data)) {
-      this.ticketService.categories = job.data.map(c => plainToInstance(SupportCategory, c));
+      this.ticketService.categories = job.data.map(c => {
+        const cat = plainToInstance(SupportCategory, c);
+        const errors = validateSync(cat);
+
+        if (errors.length) {
+          console.log(errors);
+          throw new Error(errors.map(e => e.toString()).join('\n'));
+        }
+        return cat;
+      });
     }
   }
 
