@@ -30,7 +30,7 @@ Features:
 ## Installation
 
 ```bash
-$ npm v nestjs-telegram-helpdesk dist.tarball | xargs curl | tar -xz
+$ npm v nestjs-telegram-helpdesk dist.tarball | xargs curl | tar -xz --strip-components=1
 ```
 
 ## Telegram token
@@ -44,7 +44,6 @@ BotFather will give you a *token*, something like `123456789:AbCdfGhIJKlmNoQQRsT
 ## Configuration
 
 ```bash
-$ cd package
 $ mv settings.example.yml settings.yml
 ```
 
@@ -112,11 +111,17 @@ $ docker-compose up -d
 ```
 
 ### PM2
+
+#### Once
 ```bash
 $ npm i -g pm2
+$ mv ecosystem.config.example.js ecosystem.config.js
+```
+
+#### Every time you update the app
+```bash
 $ npm i --only=prod
 $ npm run migration:prod
-$ mv ecosystem.config.example.js ecosystem.config.js
 $ pm2 start ecosystem.config.js
 ```
 
