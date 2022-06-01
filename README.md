@@ -35,6 +35,8 @@ Features:
 
 ## Installation
 
+Create a folder for the application, `cd` into it. Then download and unpack the package here: 
+
 ```bash
 $ npm v nestjs-telegram-helpdesk dist.tarball | xargs curl | tar -xz --strip-components=1
 ```
@@ -48,6 +50,8 @@ by [chatting with BotFather](https://core.telegram.org/bots#6-botfather).
 BotFather will give you a *token*, something like `123456789:AbCdfGhIJKlmNoQQRsTUVwxyZ`.
 
 ## Configuration
+
+Rename example settings file:
 
 ```bash
 $ mv settings.example.yml settings.yml
