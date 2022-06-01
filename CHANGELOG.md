@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.2...v1.1.3) (2022-06-01)
+
+
+### Bug Fixes
+
+* release ([b58af9a](https://github.com/artxru/nestjs-telegram-helpdesk/commit/b58af9aaa722f9c2f51a20cbd29ca8b1dc3d6a70))
+
 ## [1.1.2](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.1...v1.1.2) (2022-06-01)
 
 
