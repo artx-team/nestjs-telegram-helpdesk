@@ -1,73 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<table>
+<tr>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/user.jpg" /></th>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/staff.jpg" /></th>
+</tr>
+</table>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+When a user sends a message to the support chat it will create a ticket which will be forwarded to the staff group. Any admin in the staff group may answer that ticket by just replying to it. Salutation is added automatically. Photos or stickers will be forwarded too.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Currently, the support chat offers these commands (staff commands):
+* `/id` - returns your telegram id and the group chat id (1234567 -1234567890)
+* `/close` - close a ticket manually (in case someone writes 'thank you')
+* `/reopen` - reopen a ticket manually
+* `/clear` - close all tickets in category or close all tickets in all categories when typed in staff chat
+
+User commands:
+* `/start` - prints all public support categories
+* `/cat` - print current support categories
+
+Features:
+* File forwarding from and to user
+* Database for handling open and closed tickets
+* Simple anti spam system
+* Send tickets to different staff groups
+* Anonymize users
 
 ## Installation
 
 ```bash
-$ npm install
+$ npm v nestjs-telegram-helpdesk dist.tarball | xargs curl | tar -xz
 ```
+
+## Telegram token
+
+To use the [Telegram Bot API](https://core.telegram.org/bots/api),
+you first have to [get a bot account](https://core.telegram.org/bots)
+by [chatting with BotFather](https://core.telegram.org/bots#6-botfather).
+
+BotFather will give you a *token*, something like `123456789:AbCdfGhIJKlmNoQQRsTUVwxyZ`.
+
+## Configuration
+
+```bash
+$ cd package
+$ mv settings.example.yml settings.yml
+```
+
+### Settings
+
+#### `db`
+Database settings
+
+- `host`
+- `port`
+- `username`
+- `password`
+
+#### `redis`
+Redis for exchange with external process via Bull
+
+_optional. Used for support categories update in runtime_  
+- `host`
+- `port`
+
+#### `bull`
+Bull queues for external process exchange;
+
+_optional, required if "redis" is defined_
+
+- `appQueue: "app-queue-name"` # sends a message when application starts
+- `categoriesQueue: "cat-queue-name"` # listens to messages with support categories from external process
+
+#### `botToken`
+Support bot token
+
+#### `staffChatId`
+Admin's group. Accumulate messages from all categories
+
+#### `ownerId`
+Admin's telegram id
+
+#### `spamTime`
+time (in MS) in which user may send {spamCantMsg} messages
+
+#### `spamCantMsg`
+Maximum messages in {spamTime} MS
+
+#### `autoCloseTickets`
+Close tickets after answering
+
+#### `anonymousTickets`
+Include userid in tickets or not
+
+#### `categories`
+_optional_
+
+Array of built-in support categories
+
+- id: '100500' # category id
+- name: 'Superchat' # category name
+- groupId: '-100500' # telegram group id
+- isPublic: true # public flag
 
 ## Running the app
 
+### Docker
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ docker-compose up -d
 ```
 
-## Test
-
+### PM2
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ npm i -g pm2
+$ mv ecosystem.config.example.js ecosystem.config.js
+$ pm2 start ecosystem.config.js
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+[MIT](LICENSE)
