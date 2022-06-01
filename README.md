@@ -114,6 +114,8 @@ $ docker-compose up -d
 ### PM2
 ```bash
 $ npm i -g pm2
+$ npm i --only=prod
+$ npm run migration:prod
 $ mv ecosystem.config.example.js ecosystem.config.js
 $ pm2 start ecosystem.config.js
 ```
