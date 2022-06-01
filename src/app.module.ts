@@ -1,4 +1,4 @@
-import {Module, OnModuleInit, Optional} from '@nestjs/common';
+import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} from '@nestjs/common';
 import {TelegrafModule} from 'nestjs-telegraf';
 import {AppUpdate} from './app.update';
 import settings from '@/settings';
@@ -16,6 +16,7 @@ import type {Queue} from 'bull';
 import {I18nModule, I18nYamlLoader} from 'nestjs-i18n';
 import path from 'path';
 import {REMOVE_OLD_TICKETS_QUEUE, RemoveOldTicketsProcessor} from '@/processors/remove-old-tickets.processor';
+import {StaffService} from '@/staff.service';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import {REMOVE_OLD_TICKETS_QUEUE, RemoveOldTicketsProcessor} from '@/processors/
   ],
   providers: [
     AppUpdate,
+    StaffService,
     TicketService,
     ...!settings.bull ? [] : [
       CategoriesProcessor,
@@ -81,10 +83,11 @@ import {REMOVE_OLD_TICKETS_QUEUE, RemoveOldTicketsProcessor} from '@/processors/
     ],
   ],
 })
-export class AppModule implements OnModuleInit {
+export class AppModule implements OnModuleInit, OnModuleDestroy, OnApplicationShutdown {
   constructor(
     @Optional() @InjectQueue(settings.bull?.appQueue) private readonly q: Queue,
     @Optional() @InjectQueue(REMOVE_OLD_TICKETS_QUEUE) private readonly tQ: Queue,
+    private readonly staffService: StaffService,
   ) { }
 
   async onModuleInit(): Promise<void> {
@@ -103,5 +106,15 @@ export class AppModule implements OnModuleInit {
         },
       });
     }
+
+    this.staffService.message('Application started').catch(e => console.log(e));
+  }
+
+  async onModuleDestroy(): Promise<void> {
+    await this.staffService.message('Application stopped').catch(e => console.log(e));
+  }
+
+  async onApplicationShutdown(signal?: string): Promise<void> {
+    await this.staffService.message('Application shutdown').catch(e => console.log(e));
   }
 }
