@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.5...v1.2.0) (2022-06-01)
+
+
+### Features
+
+* automatic deletion of closed tickets in database ([58056c4](https://github.com/artxru/nestjs-telegram-helpdesk/commit/58056c4a7a5aa7c7cefdf37f5820994840712086))
+
 ## [1.1.5](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.4...v1.1.5) (2022-06-01)
 
 

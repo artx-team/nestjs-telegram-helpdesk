@@ -32,12 +32,23 @@ const app_processor_1 = require("./processors/app.processor");
 const { db } = settings_1.default;
 const nestjs_i18n_1 = require("nestjs-i18n");
 const path_1 = __importDefault(require("path"));
+const remove_old_tickets_processor_1 = require("./processors/remove-old-tickets.processor");
 let AppModule = class AppModule {
-    constructor(q) {
+    constructor(q, tQ) {
         this.q = q;
+        this.tQ = tQ;
     }
-    onModuleInit() {
-        this.q?.add({});
+    async onModuleInit() {
+        this.q?.add({}).catch(e => console.log(e));
+        if (this.tQ && settings_1.default.tickets?.daysToKeepTickets) {
+            const jobs = await this.tQ.getRepeatableJobs();
+            await Promise.all(jobs.map(job => this.tQ.removeRepeatableByKey(job.key)));
+            await this.tQ.add(null, {
+                repeat: {
+                    cron: settings_1.default.tickets.removeTicketsCron,
+                },
+            });
+        }
     }
 };
 AppModule = __decorate([
@@ -48,15 +59,20 @@ AppModule = __decorate([
                 ticket_entity_1.Ticket,
                 message_entity_1.Message,
             ]),
-            ...(settings_1.default.redis && settings_1.default.bull) ? [
+            ...!settings_1.default.redis ? [] : [
                 bull_1.BullModule.forRoot({
                     redis: {
                         host: settings_1.default.redis.host,
                         port: settings_1.default.redis.port,
                     },
                 }),
+            ],
+            ...!settings_1.default.bull ? [] : [
                 bull_1.BullModule.registerQueue({ name: settings_1.default.bull.appQueue }, { name: settings_1.default.bull.categoriesQueue }),
-            ] : [],
+            ],
+            ...!settings_1.default.tickets ? [] : [
+                bull_1.BullModule.registerQueue({ name: remove_old_tickets_processor_1.REMOVE_OLD_TICKETS_QUEUE }),
+            ],
             nestjs_telegraf_1.TelegrafModule.forRoot({
                 token: settings_1.default.botToken,
                 middlewares: [
@@ -80,15 +96,20 @@ AppModule = __decorate([
         providers: [
             app_update_1.AppUpdate,
             ticket_service_1.TicketService,
-            ...settings_1.default.bull ? [
+            ...!settings_1.default.bull ? [] : [
                 categories_processor_1.CategoriesProcessor,
                 app_processor_1.AppProcessor,
-            ] : [],
+            ],
+            ...!settings_1.default.tickets ? [] : [
+                remove_old_tickets_processor_1.RemoveOldTicketsProcessor,
+            ],
         ],
     }),
     __param(0, (0, common_1.Optional)()),
     __param(0, (0, bull_1.InjectQueue)(settings_1.default.bull?.appQueue)),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, common_1.Optional)()),
+    __param(1, (0, bull_1.InjectQueue)(remove_old_tickets_processor_1.REMOVE_OLD_TICKETS_QUEUE)),
+    __metadata("design:paramtypes", [Object, Object])
 ], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

@@ -16,6 +16,7 @@ const db_1 = require("./db");
 const redis_1 = require("./redis");
 const bull_settings_1 = require("./bull-settings");
 const support_category_1 = require("../../dto/support-category");
+const ticket_settings_1 = require("./ticket-settings");
 class Settings {
 }
 __decorate([
@@ -25,10 +26,17 @@ __decorate([
     __metadata("design:type", db_1.Db)
 ], Settings.prototype, "db", void 0);
 __decorate([
-    (0, class_transformer_1.Type)(() => redis_1.Redis),
+    (0, class_transformer_1.Type)(() => ticket_settings_1.TicketSettings),
     (0, class_validator_1.ValidateNested)(),
     (0, class_validator_1.IsObject)(),
     (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", ticket_settings_1.TicketSettings)
+], Settings.prototype, "tickets", void 0);
+__decorate([
+    (0, class_transformer_1.Type)(() => redis_1.Redis),
+    (0, class_validator_1.ValidateNested)(),
+    (0, class_validator_1.IsObject)(),
+    (0, class_validator_1.ValidateIf)(o => !!o.tickets),
     __metadata("design:type", redis_1.Redis)
 ], Settings.prototype, "redis", void 0);
 __decorate([

@@ -23,6 +23,7 @@ export declare class TicketService {
     closeTicket(ctx: HelpdeskContext): Promise<void>;
     reopenTicket(ctx: HelpdeskContext): Promise<void>;
     closeAllTickets(ctx: HelpdeskContext): Promise<void>;
+    removeOldTickets(): Promise<void>;
     private getCategory;
     private userChat;
     private staffChat;

@@ -149,6 +149,16 @@ let TicketService = TicketService_1 = class TicketService {
             lang: ctx.message.from.language_code,
         }), { parse_mode: 'HTML' });
     }
+    async removeOldTickets() {
+        const sql = this.ticketRepository
+            .createQueryBuilder('ticket')
+            .delete()
+            .where('now() - created_at > :days::interval', {
+            days: `${settings_1.default.tickets.daysToKeepTickets} days`,
+            status: ticket_status_1.TicketStatus.Closed,
+        });
+        await sql.execute();
+    }
     getCategory(categoryId) {
         return this.categories.length > 0 ?
             this.categories.find(c => c.id === categoryId) :
