@@ -1,7 +1,13 @@
+## Description
+
+It is an application designed to make a helpdesk via telegram. 
+When a user writes to the support bot, it forwards the message to the support group, then one member of the support team replies the message, and it is being forwarded to the user.  
+
+
 <table>
 <tr>
-<th><img src="https://artx.ru/sites/default/files/telegram-support/user.jpg" /></th>
-<th><img src="https://artx.ru/sites/default/files/telegram-support/staff.jpg" /></th>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/user.png" /></th>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/staff.png" /></th>
 </tr>
 </table>
 

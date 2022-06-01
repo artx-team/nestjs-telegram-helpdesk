@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/artxru/nestjs-telegram-helpdesk.git"
+    "url": "https://github.com/artx-team/nestjs-telegram-helpdesk.git"
   },
   "bugs": {
-    "url": "https://github.com/artxru/nestjs-telegram-helpdesk/issues"
+    "url": "https://github.com/artx-team/nestjs-telegram-helpdesk/issues"
   },
   "main": "dist/main.js",
   "engines": {
