@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.3.0...v1.3.1) (2022-06-01)
+
+
+### Bug Fixes
+
+* docker start chmod ([268e539](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/268e539c0e7eb22989f1b085246e03f4020f6718))
+
 # [1.3.0](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.2.0...v1.3.0) (2022-06-01)
 
 
