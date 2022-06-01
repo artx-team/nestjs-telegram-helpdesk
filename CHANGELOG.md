@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.3...v1.1.4) (2022-06-01)
+
+
+### Bug Fixes
+
+* @nestjs/typeorm version ([3536256](https://github.com/artxru/nestjs-telegram-helpdesk/commit/35362564eaad5e3be0f53303fb7368ff9fb3cecd))
+
 ## [1.1.3](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.2...v1.1.3) (2022-06-01)
 
 
