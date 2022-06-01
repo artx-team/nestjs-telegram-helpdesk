@@ -95,7 +95,10 @@
     "README.md",
     "nest-cli.json",
     "start.sh",
-    "package-lock.json"
+    "package-lock.json",
+    "ecosystem.config.example.js",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "jest": {
     "moduleFileExtensions": [
