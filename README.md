@@ -103,6 +103,15 @@ Array of built-in support categories
 - groupId: '-100500' # telegram group id
 - isPublic: true # public flag
 
+## Support categories
+
+Adding support categories allows you to have invitation links:
+
+`https://t.me/{helpdesk_bot_name}?start={id}`
+
+- `helpdesk_bot_name` is your bot's username
+- `id` is category id from config. Unique string, e.g. UUID
+
 ## Running the app
 
 ### Docker
