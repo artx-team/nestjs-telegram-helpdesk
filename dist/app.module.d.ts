@@ -1,8 +1,12 @@
-import { OnModuleInit } from '@nestjs/common';
+import { OnApplicationShutdown, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import type { Queue } from 'bull';
-export declare class AppModule implements OnModuleInit {
+import { StaffService } from '@/staff.service';
+export declare class AppModule implements OnModuleInit, OnModuleDestroy, OnApplicationShutdown {
     private readonly q;
     private readonly tQ;
-    constructor(q: Queue, tQ: Queue);
+    private readonly staffService;
+    constructor(q: Queue, tQ: Queue, staffService: StaffService);
     onModuleInit(): Promise<void>;
+    onModuleDestroy(): Promise<void>;
+    onApplicationShutdown(signal?: string): Promise<void>;
 }

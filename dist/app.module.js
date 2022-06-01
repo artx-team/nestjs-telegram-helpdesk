@@ -33,10 +33,12 @@ const { db } = settings_1.default;
 const nestjs_i18n_1 = require("nestjs-i18n");
 const path_1 = __importDefault(require("path"));
 const remove_old_tickets_processor_1 = require("./processors/remove-old-tickets.processor");
+const staff_service_1 = require("./staff.service");
 let AppModule = class AppModule {
-    constructor(q, tQ) {
+    constructor(q, tQ, staffService) {
         this.q = q;
         this.tQ = tQ;
+        this.staffService = staffService;
     }
     async onModuleInit() {
         this.q?.add({}).catch(e => console.log(e));
@@ -49,6 +51,13 @@ let AppModule = class AppModule {
                 },
             });
         }
+        this.staffService.message('Application started').catch(e => console.log(e));
+    }
+    async onModuleDestroy() {
+        await this.staffService.message('Application stopped').catch(e => console.log(e));
+    }
+    async onApplicationShutdown(signal) {
+        await this.staffService.message('Application shutdown').catch(e => console.log(e));
     }
 };
 AppModule = __decorate([
@@ -95,6 +104,7 @@ AppModule = __decorate([
         ],
         providers: [
             app_update_1.AppUpdate,
+            staff_service_1.StaffService,
             ticket_service_1.TicketService,
             ...!settings_1.default.bull ? [] : [
                 categories_processor_1.CategoriesProcessor,
@@ -109,7 +119,7 @@ AppModule = __decorate([
     __param(0, (0, bull_1.InjectQueue)(settings_1.default.bull?.appQueue)),
     __param(1, (0, common_1.Optional)()),
     __param(1, (0, bull_1.InjectQueue)(remove_old_tickets_processor_1.REMOVE_OLD_TICKETS_QUEUE)),
-    __metadata("design:paramtypes", [Object, Object])
+    __metadata("design:paramtypes", [Object, Object, staff_service_1.StaffService])
 ], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

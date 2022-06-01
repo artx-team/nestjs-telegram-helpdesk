@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.2.0...v1.3.0) (2022-06-01)
+
+
+### Features
+
+* send message to staff on start and shutdown ([107c23d](https://github.com/artxru/nestjs-telegram-helpdesk/commit/107c23d4acd4b2dccc75db35ed720415966b1952))
+
 # [1.2.0](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.5...v1.2.0) (2022-06-01)
 
 
