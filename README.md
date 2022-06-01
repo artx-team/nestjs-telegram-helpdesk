@@ -6,8 +6,8 @@ When a user writes to the support bot, it forwards the message to the support gr
 
 <table>
 <tr>
-<th><img src="https://artx.ru/sites/default/files/telegram-support/user.png" /></th>
-<th><img src="https://artx.ru/sites/default/files/telegram-support/staff.png" /></th>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/u.jpg" /></th>
+<th><img src="https://artx.ru/sites/default/files/telegram-support/s.jpg" /></th>
 </tr>
 </table>
 
