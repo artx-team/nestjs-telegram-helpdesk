@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.0.2...v1.1.0) (2022-06-01)
+
+
+### Bug Fixes
+
+* docker environment ([9cd1856](https://github.com/artxru/nestjs-telegram-helpdesk/commit/9cd1856c190d5cb2a8b780f59bd02dbe30707c2a))
+
+
+### Features
+
+* ecosystem for PM2 ([bf24e22](https://github.com/artxru/nestjs-telegram-helpdesk/commit/bf24e2254aa3fe76cb58a8c5e60a422eb91b093c))
+
 ## [1.0.2](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.0.1...v1.0.2) (2022-05-31)
 
 
