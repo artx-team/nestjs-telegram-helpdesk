@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.4...v1.1.5) (2022-06-01)
+
+
+### Bug Fixes
+
+* include ecosystem to package ([4cf01a5](https://github.com/artxru/nestjs-telegram-helpdesk/commit/4cf01a57c785ae9e2fe53dc9a7cbc9a4dda51e3f))
+
 ## [1.1.4](https://github.com/artxru/nestjs-telegram-helpdesk/compare/v1.1.3...v1.1.4) (2022-06-01)
 
 
