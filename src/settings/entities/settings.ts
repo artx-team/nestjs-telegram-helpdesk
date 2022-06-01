@@ -4,6 +4,7 @@ import {Db} from '@/settings/entities/db';
 import {Redis} from '@/settings/entities/redis';
 import {BullSettings} from '@/settings/entities/bull-settings';
 import {SupportCategory} from '@/dto/support-category';
+import {TicketSettings} from '@/settings/entities/ticket-settings';
 
 /**
  * Application settings
@@ -15,10 +16,16 @@ export class Settings {
   @IsObject()
   db: Db;
 
-  @Type(() => Redis)
+  @Type(() => TicketSettings)
   @ValidateNested()
   @IsObject()
   @IsOptional()
+  tickets?: TicketSettings;
+
+  @Type(() => Redis)
+  @ValidateNested()
+  @IsObject()
+  @ValidateIf(o => !!o.tickets)
   redis?: Redis;
 
   @Type(() => BullSettings)

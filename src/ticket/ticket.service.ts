@@ -12,6 +12,7 @@ import {Message} from '@/ticket/message.entity';
 import type {User} from 'typegram/manage';
 import {UpdateResult} from 'typeorm/query-builder/result/UpdateResult';
 import {I18nService} from 'nestjs-i18n';
+import * as Process from 'process';
 
 @Injectable()
 export class TicketService {
@@ -208,6 +209,18 @@ export class TicketService {
       }),
       {parse_mode: 'HTML'},
     );
+  }
+
+  async removeOldTickets(): Promise<void> {
+    const sql = this.ticketRepository
+      .createQueryBuilder('ticket')
+      .delete()
+      .where('now() - created_at > :days::interval', {
+        days: `${settings.tickets.daysToKeepTickets} days`,
+        status: TicketStatus.Closed,
+      });
+
+    await sql.execute();
   }
 
   /**

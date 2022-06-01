@@ -6,6 +6,13 @@ db:
   password: "postgres"
   database: "telegram_helpdesk"
 
+# Tickets TTL
+tickets:
+  # How many days to keep closed tickets. 0 for infinite
+  daysToKeepTickets: 14
+  # When to launch clean up
+  removeTicketsCron: '0 0 * * *'
+
 # Redis for bull exchange; optional
 redis:
   host: "localhost"

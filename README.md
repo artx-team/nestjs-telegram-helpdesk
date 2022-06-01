@@ -60,9 +60,15 @@ Database settings
 #### `redis`
 Redis for exchange with external process via Bull
 
-_optional. Used for support categories update in runtime_  
+_optional. Used for support categories update in runtime_
+_required if tickets is defined_
 - `host`
 - `port`
+
+#### `tickets`
+_optional. Used for deletion of closed tickets_
+- `daysToKeepTickets` # How many days to keep closed tickets. 0 for infinite
+- `removeTicketsCron` # When to launch clean up
 
 #### `bull`
 Bull queues for external process exchange;
