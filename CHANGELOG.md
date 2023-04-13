@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.3.1...v1.4.0) (2023-04-13)
+
+
+### Bug Fixes
+
+* import plugins ([97150f5](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/97150f5744cf586c84c23d4647833b4db7938fcf))
+
+
+### Features
+
+* custom message handlers [wip] ([6c35851](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/6c35851003cf3bb7b48086f7d956f594e4599755))
+* custom module loader [wip] ([4f3a9d6](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/4f3a9d66d01c905b9fb1b2a22c1c3da5f3942e57))
+* custom module loader [wip] ([69da70c](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/69da70c2e13afca183053f485bc6192ec356dd43))
+
 ## [1.3.1](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.3.0...v1.3.1) (2022-06-01)
 
 
