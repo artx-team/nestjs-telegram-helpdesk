@@ -121,7 +121,7 @@ export class AppModule implements OnModuleInit, OnModuleDestroy, OnApplicationSh
     await this.staffService.message('Application stopped').catch(e => console.log(e));
   }
 
-  async onApplicationShutdown(signal?: string): Promise<void> {
+  async onApplicationShutdown(): Promise<void> {
     await this.staffService.message('Application shutdown').catch(e => console.log(e));
   }
 }

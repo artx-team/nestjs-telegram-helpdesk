@@ -1,7 +1,8 @@
 import {Injectable} from '@nestjs/common';
-import {HelpdeskContext} from '@/helpdesk-context';
 import {InjectBot} from 'nestjs-telegraf';
 import {Telegraf} from 'telegraf';
+
+import {HelpdeskContext} from '@/helpdesk-context';
 import settings from '@/settings';
 
 @Injectable()

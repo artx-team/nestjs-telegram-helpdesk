@@ -1,5 +1,5 @@
-import {IsInt, Min, ValidateIf} from 'class-validator';
 import {IsCron} from '@kovalenko/is-cron';
+import {IsInt, Min, ValidateIf} from 'class-validator';
 
 export class TicketSettings {
   @Min(0)

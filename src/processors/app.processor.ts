@@ -2,6 +2,7 @@ import {
   OnGlobalQueueFailed,
   Processor,
 } from '@nestjs/bull';
+
 import settings from '@/settings';
 
 @Processor(settings.bull?.appQueue)
