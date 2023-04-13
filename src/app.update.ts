@@ -1,7 +1,10 @@
+import {EventBus} from '@nestjs/cqrs';
 import {Command, Ctx, Hears, Next, On, Update, Use} from 'nestjs-telegraf';
+
+import {OnTelegramMessageEvent} from '@/events/impl/on-telegram-message.event';
+import {FileType} from '@/file-type';
 import {HelpdeskContext} from '@/helpdesk-context';
 import settings from '@/settings';
-import {FileType} from '@/file-type';
 import {TicketService} from '@/ticket/ticket.service';
 
 @Update()
@@ -9,6 +12,7 @@ export class AppUpdate {
 
   constructor(
     private readonly ticketService: TicketService,
+    private readonly eventBus: EventBus,
   ) { }
 
   @Use()
@@ -72,13 +76,6 @@ export class AppUpdate {
     await this.ticketService.closeAllTickets(ctx);
   }
 
-  @On([FileType.Photo, FileType.Video, FileType.Document])
-  async onPhoto(
-    @Ctx() ctx: HelpdeskContext,
-  ): Promise<void> {
-    await this.ticketService.handleMessage(ctx);
-  }
-
   @Hears(/^\/start ?(.*)/)
   async start(
     @Ctx() ctx: HelpdeskContext,
@@ -87,17 +84,32 @@ export class AppUpdate {
     await this.ticketService.start(ctx, category);
   }
 
+  @On([FileType.Photo, FileType.Video, FileType.Document])
+  async onPhoto(
+    @Ctx() ctx: HelpdeskContext,
+  ): Promise<void> {
+    await this.handleMessage(ctx);
+  }
+
   @Hears(/^(?!(\/start ))(.+)/)
   async hearsMessages(
     @Ctx() ctx: HelpdeskContext,
   ): Promise<void> {
-    await this.ticketService.handleMessage(ctx);
+    await this.handleMessage(ctx);
   }
 
   @On('sticker')
   async handleSticker(
     @Ctx() ctx: HelpdeskContext,
   ): Promise<void> {
-    await this.ticketService.handleMessage(ctx);
+    await this.handleMessage(ctx);
+  }
+
+  private async handleMessage(ctx: HelpdeskContext): Promise<void> {
+    const hook = new OnTelegramMessageEvent(ctx);
+    this.eventBus.publish(hook);
+    if (await hook.getResult()) {
+      await this.ticketService.handleMessage(ctx);
+    }
   }
 }

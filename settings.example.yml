@@ -5,6 +5,11 @@ db:
   username: "postgres"
   password: "postgres"
   database: "telegram_helpdesk"
+  migrations:
+    - "./src/migrations/**/*.ts"
+    - "./dist/migrations/**/*.js"
+  entities:
+    - "./**/*.entity{.ts,.js}"
 
 # Tickets TTL
 tickets:

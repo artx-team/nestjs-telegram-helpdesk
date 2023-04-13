@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+//import chalk from 'chalk';
 import {plainToInstance} from 'class-transformer';
 import {validateSync} from 'class-validator';
 import {load} from 'js-yaml';
@@ -12,8 +12,8 @@ function parseYml(filePath: string): any {
     const content = fs.readFileSync(filePath, 'utf-8');
     return load(content);
   } catch (e) {
-    console.error(chalk.red(`${SETTINGS_PARSING_ERROR} ${filePath}`));
-    console.error(chalk.red(e));
+    console.error((`${SETTINGS_PARSING_ERROR} ${filePath}`));
+    console.error((e));
     process.exit(1);
   }
 }
@@ -22,8 +22,8 @@ function validateSettings(settings: Settings): Settings {
   const errors = validateSync(settings);
 
   if (errors.length) {
-    console.error(chalk.red(SETTINGS_PARSING_ERROR));
-    console.error(chalk.red(errors.join('\n')));
+    console.error((SETTINGS_PARSING_ERROR));
+    console.error((errors.join('\n')));
     process.exit(1);
   }
 
@@ -34,7 +34,7 @@ function getSettings(settingsFilePath = './settings.yml'): Settings {
   let settings = parseYml(settingsFilePath);
 
   if (!settings) {
-    console.error(chalk.red(`${SETTINGS_PARSING_ERROR} empty file content`));
+    console.error((`${SETTINGS_PARSING_ERROR} empty file content`));
     process.exit(1);
   }
 

@@ -1,4 +1,4 @@
-import {IsInt, IsString, IsUrl} from 'class-validator';
+import {IsArray, IsInt, IsString, IsUrl} from 'class-validator';
 
 export class Db {
   @IsUrl({require_tld: false})
@@ -15,4 +15,12 @@ export class Db {
 
   @IsString()
   database: string;
+
+  @IsString({each: true})
+  @IsArray()
+  migrations: string[];
+
+  @IsString({each: true})
+  @IsArray()
+  entities: string[];
 }
