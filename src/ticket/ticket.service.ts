@@ -526,7 +526,7 @@ export class TicketService {
       .select('sender_id')
       .where({
         ticketId,
-        createdAt: Raw(alias => `${alias} >= now()::date - interval ':1 minutes'`, [settings.spamTime]),
+        createdAt: Raw(alias => `${alias} >= (now() - interval '${settings.spamTime} milliseconds')`),
       })
       .orderBy({created_at: 'DESC'})
       .getRawMany();
