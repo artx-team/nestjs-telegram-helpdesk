@@ -2,7 +2,7 @@ import {BullModule, InjectQueue} from '@nestjs/bull';
 import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import type {Queue} from 'bull';
-import {I18nModule, I18nYamlLoader} from 'nestjs-i18n';
+import {HeaderResolver, I18nModule, I18nYamlLoader} from 'nestjs-i18n';
 import {TelegrafModule} from 'nestjs-telegraf';
 import PostgresSession from 'telegraf-postgres-session';
 
@@ -75,6 +75,9 @@ const {db} = settings;
         path: path.join(__dirname, '/i18n/'),
       },
       loader: I18nYamlLoader,
+      resolvers: [
+        new HeaderResolver(['lang']),
+      ],
     }),
   ],
   providers: [
