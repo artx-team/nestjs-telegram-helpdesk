@@ -1,22 +1,27 @@
-import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} from '@nestjs/common';
-import {TelegrafModule} from 'nestjs-telegraf';
-import {AppUpdate} from './app.update';
-import settings from '@/settings';
-import PostgresSession from 'telegraf-postgres-session';
 import {BullModule, InjectQueue} from '@nestjs/bull';
-import {TicketService} from '@/ticket/ticket.service';
+import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import {Ticket} from '@/ticket/ticket.entity';
-import {OrmModule} from '@/orm/orm.module';
-import {Message} from '@/ticket/message.entity';
-import {CategoriesProcessor} from '@/processors/categories.processor';
-import {AppProcessor} from '@/processors/app.processor';
-const {db} = settings;
 import type {Queue} from 'bull';
 import {I18nModule, I18nYamlLoader} from 'nestjs-i18n';
+import {TelegrafModule} from 'nestjs-telegraf';
+import PostgresSession from 'telegraf-postgres-session';
+
 import path from 'path';
+
+import {AppUpdate} from './app.update';
+
+import {modules} from '@/import-modules';
+import {OrmModule} from '@/orm/orm.module';
+import {AppProcessor} from '@/processors/app.processor';
+import {CategoriesProcessor} from '@/processors/categories.processor';
 import {REMOVE_OLD_TICKETS_QUEUE, RemoveOldTicketsProcessor} from '@/processors/remove-old-tickets.processor';
+import settings from '@/settings';
 import {StaffService} from '@/staff.service';
+import {Message} from '@/ticket/message.entity';
+import {Ticket} from '@/ticket/ticket.entity';
+import {TicketService} from '@/ticket/ticket.service';
+
+const {db} = settings;
 
 @Module({
   imports: [
