@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.0...v1.4.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* plugin — import default ([7e53b3e](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/7e53b3ec2ccbeea792beea5c74c739745fb5c1c8))
+
 # [1.4.0](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.3.1...v1.4.0) (2023-04-13)
 
 
