@@ -1,10 +1,11 @@
-import {ConnectionOptions} from 'typeorm';
+import {DataSourceOptions} from 'typeorm';
 import {SnakeNamingStrategy} from 'typeorm-naming-strategies';
 
 import settings from '@/settings';
 
 const {db} = settings;
-const config: ConnectionOptions = {
+
+const config: DataSourceOptions = {
   type: 'postgres',
   host: db.host,
   port: db.port,
@@ -15,9 +16,6 @@ const config: ConnectionOptions = {
   synchronize: false,
   migrationsTableName: 'migration',
   migrations: db.migrations,
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
 };

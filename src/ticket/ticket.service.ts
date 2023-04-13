@@ -14,8 +14,6 @@ import {Message} from '@/ticket/message.entity';
 import {TicketStatus} from '@/ticket/ticket-status';
 import {Ticket} from '@/ticket/ticket.entity';
 
-
-
 @Injectable()
 export class TicketService {
   static readonly ticketMessageRegExp = /#T(\d+)/;
@@ -262,7 +260,7 @@ export class TicketService {
       return;
     }
 
-    let ticket = await this.ticketRepository.findOne({
+    let ticket = await this.ticketRepository.findOneBy({
       userId: ctx.message.from.id.toString(),
       status: TicketStatus.Open,
       category: category.id,
@@ -382,7 +380,7 @@ export class TicketService {
     }
 
     // find ticket in database
-    const ticket = await this.ticketRepository.findOne({
+    const ticket = await this.ticketRepository.findOneBy({
       id: Number(ticketId),
     });
 
