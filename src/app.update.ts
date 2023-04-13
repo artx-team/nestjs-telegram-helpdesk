@@ -84,15 +84,15 @@ export class AppUpdate {
     await this.ticketService.start(ctx, category);
   }
 
-  @On([FileType.Photo, FileType.Video, FileType.Document])
-  async onPhoto(
+  @Hears(/^(?!(\/start ))(.+)/)
+  async hearsMessages(
     @Ctx() ctx: HelpdeskContext,
   ): Promise<void> {
     await this.handleMessage(ctx);
   }
 
-  @Hears(/^(?!(\/start ))(.+)/)
-  async hearsMessages(
+  @On([FileType.Photo, FileType.Video, FileType.Document])
+  async onPhoto(
     @Ctx() ctx: HelpdeskContext,
   ): Promise<void> {
     await this.handleMessage(ctx);

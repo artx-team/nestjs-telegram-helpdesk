@@ -24,8 +24,6 @@ import {TicketService} from '@/ticket/ticket.service';
 
 const {db} = settings;
 
-console.log(plugins);
-
 @Module({
   imports: [
     ...plugins,

@@ -11,7 +11,7 @@ const config: ConnectionOptions = {
   username: db.username,
   password: db.password,
   database: db.database,
-  entities: db.entities.map(e => __dirname + e),
+  entities: db.entities,
   synchronize: false,
   migrationsTableName: 'migration',
   migrations: db.migrations,
