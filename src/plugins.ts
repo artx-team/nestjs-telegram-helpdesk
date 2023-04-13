@@ -6,6 +6,6 @@ export async function loadPlugins(): Promise<void> {
   if (settings.plugins.length > 0) {
     const loaded = await Promise.all(settings.plugins.map(m => import(m)));
 
-    loaded.forEach(m => plugins.push(m));
+    loaded.forEach(m => plugins.push(m.default));
   }
 }
