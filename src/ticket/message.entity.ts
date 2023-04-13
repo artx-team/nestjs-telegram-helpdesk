@@ -8,6 +8,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn, UpdateDateColumn,
 } from 'typeorm';
+
 import {Ticket} from '@/ticket/ticket.entity';
 
 @Entity()

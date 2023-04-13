@@ -2,7 +2,9 @@
 import {plainToInstance} from 'class-transformer';
 import {validateSync} from 'class-validator';
 import {load} from 'js-yaml';
+
 import fs from 'fs';
+
 import {Settings} from './entities/settings';
 
 const SETTINGS_PARSING_ERROR = '\n\nSETTINGS PARSING ERROR';

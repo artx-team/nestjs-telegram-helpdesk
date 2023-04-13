@@ -3,14 +3,18 @@ import {
   Processor,
   Process, InjectQueue,
 } from '@nestjs/bull';
-import settings from '@/settings';
+import {Optional} from '@nestjs/common';
 import type {Job} from 'bull';
 import {Queue} from 'bull';
-import {TicketService} from '@/ticket/ticket.service';
 import {plainToInstance} from 'class-transformer';
-import {SupportCategory} from '@/dto/support-category';
-import {Optional} from '@nestjs/common';
 import {validateSync} from 'class-validator';
+
+import {SupportCategory} from '@/dto/support-category';
+import settings from '@/settings';
+import {TicketService} from '@/ticket/ticket.service';
+
+
+
 
 @Processor(settings.bull?.categoriesQueue)
 export class CategoriesProcessor {

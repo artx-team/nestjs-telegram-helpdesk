@@ -1,4 +1,5 @@
 import {Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+
 import {TicketStatus} from '@/ticket/ticket-status';
 
 @Entity()

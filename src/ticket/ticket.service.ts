@@ -1,18 +1,20 @@
 import {Injectable} from '@nestjs/common';
-import {SupportCategory} from '@/dto/support-category';
-import {HelpdeskContext} from '@/helpdesk-context';
 import {InjectRepository} from '@nestjs/typeorm';
-import {Ticket} from '@/ticket/ticket.entity';
-import {Repository, Raw} from 'typeorm';
-import {TicketStatus} from '@/ticket/ticket-status';
+import {I18nService} from 'nestjs-i18n';
 import {InjectBot} from 'nestjs-telegraf';
 import {Telegraf, TelegramError} from 'telegraf';
+import type {User} from 'typegram/manage';
+import {Repository, Raw} from 'typeorm';
+import {UpdateResult} from 'typeorm/query-builder/result/UpdateResult';
+
+import {SupportCategory} from '@/dto/support-category';
+import {HelpdeskContext} from '@/helpdesk-context';
 import settings from '@/settings';
 import {Message} from '@/ticket/message.entity';
-import type {User} from 'typegram/manage';
-import {UpdateResult} from 'typeorm/query-builder/result/UpdateResult';
-import {I18nService} from 'nestjs-i18n';
-import * as Process from 'process';
+import {TicketStatus} from '@/ticket/ticket-status';
+import {Ticket} from '@/ticket/ticket.entity';
+
+
 
 @Injectable()
 export class TicketService {
@@ -26,15 +28,6 @@ export class TicketService {
   };
 
   private static escapeCharsRegExp = new RegExp('[' + Object.keys(TicketService.escapeChars).join('') + ']', 'g');
-
-  categories: SupportCategory[] = settings.categories ?? [];
-
-  constructor(
-    @InjectBot() private readonly bot: Telegraf<HelpdeskContext>,
-    @InjectRepository(Ticket) private readonly ticketRepository: Repository<Ticket>,
-    @InjectRepository(Message) private readonly messageRepository: Repository<Message>,
-    private readonly i18n: I18nService,
-  ) { }
 
   static escapeSpecialChars(input: string): string {
     return input.replaceAll(TicketService.escapeCharsRegExp, key => TicketService.escapeChars[key]);
@@ -56,6 +49,15 @@ export class TicketService {
 
     return '';
   }
+
+  categories: SupportCategory[] = settings.categories ?? [];
+
+  constructor(
+    @InjectBot() private readonly bot: Telegraf<HelpdeskContext>,
+    @InjectRepository(Ticket) private readonly ticketRepository: Repository<Ticket>,
+    @InjectRepository(Message) private readonly messageRepository: Repository<Message>,
+    private readonly i18n: I18nService,
+  ) { }
 
   /**
    * Start command handler
@@ -375,7 +377,7 @@ export class TicketService {
           lang: ctx.message.from.language_code,
         },
       );
-      await ctx.reply(message, {reply_to_message_id : ctx.message.message_id});
+      await ctx.reply(message, {reply_to_message_id: ctx.message.message_id});
       return null;
     }
 
@@ -395,7 +397,7 @@ export class TicketService {
           },
         },
       );
-      await ctx.reply(message, {reply_to_message_id : ctx.message.message_id});
+      await ctx.reply(message, {reply_to_message_id: ctx.message.message_id});
       return null;
     }
 
@@ -411,7 +413,7 @@ export class TicketService {
           },
         },
       );
-      await ctx.reply(message, {reply_to_message_id : ctx.message.message_id});
+      await ctx.reply(message, {reply_to_message_id: ctx.message.message_id});
       return null;
     }
 
