@@ -21,12 +21,14 @@ import {StaffService} from '@/staff.service';
 import {Message} from '@/ticket/message.entity';
 import {Ticket} from '@/ticket/ticket.entity';
 import {TicketService} from '@/ticket/ticket.service';
+import {CqrsModule} from '@nestjs/cqrs';
 
 const {db} = settings;
 
 @Module({
   imports: [
     ...plugins,
+    CqrsModule,
     OrmModule,
     TypeOrmModule.forFeature([
       Ticket,

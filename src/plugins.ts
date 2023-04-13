@@ -1,9 +1,11 @@
+import settings from '@/settings';
+
 export const plugins = [];
 
 export async function loadPlugins(): Promise<void> {
-  const loaded = await Promise.all([
-    import('@nestjs/cqrs').then(m => m.CqrsModule),
-  ]);
+  if (settings.plugins.length > 0) {
+    const loaded = await Promise.all(settings.plugins.map(m => import(m)));
 
-  loaded.forEach(m => plugins.push(m));
+    loaded.forEach(m => plugins.push(m));
+  }
 }
