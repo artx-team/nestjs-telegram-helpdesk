@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.1...v1.4.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* antispam filter ([08579e6](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/08579e65bdcee30a3ade41c389ceb8817dfa653f))
+
 ## [1.4.1](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.0...v1.4.1) (2023-04-13)
 
 
