@@ -6,12 +6,13 @@ import {I18nModule, I18nYamlLoader} from 'nestjs-i18n';
 import {TelegrafModule} from 'nestjs-telegraf';
 import PostgresSession from 'telegraf-postgres-session';
 
+import * as console from 'console';
 import path from 'path';
 
 import {AppUpdate} from './app.update';
 
-import {modules} from '@/import-modules';
 import {OrmModule} from '@/orm/orm.module';
+import {plugins} from '@/plugins';
 import {AppProcessor} from '@/processors/app.processor';
 import {CategoriesProcessor} from '@/processors/categories.processor';
 import {REMOVE_OLD_TICKETS_QUEUE, RemoveOldTicketsProcessor} from '@/processors/remove-old-tickets.processor';
@@ -23,8 +24,11 @@ import {TicketService} from '@/ticket/ticket.service';
 
 const {db} = settings;
 
+console.log(plugins);
+
 @Module({
   imports: [
+    ...plugins,
     OrmModule,
     TypeOrmModule.forFeature([
       Ticket,

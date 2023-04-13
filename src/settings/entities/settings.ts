@@ -1,9 +1,20 @@
-import {IsBoolean, IsInt, IsObject, IsOptional, IsString, Min, ValidateIf, ValidateNested} from 'class-validator';
 import {Type} from 'class-transformer';
+import {
+  IsArray,
+  IsBoolean,
+  IsInt,
+  IsObject,
+  IsOptional,
+  IsString,
+  Min,
+  ValidateIf,
+  ValidateNested,
+} from 'class-validator';
+
+import {SupportCategory} from '@/dto/support-category';
+import {BullSettings} from '@/settings/entities/bull-settings';
 import {Db} from '@/settings/entities/db';
 import {Redis} from '@/settings/entities/redis';
-import {BullSettings} from '@/settings/entities/bull-settings';
-import {SupportCategory} from '@/dto/support-category';
 import {TicketSettings} from '@/settings/entities/ticket-settings';
 
 /**
@@ -66,4 +77,8 @@ export class Settings {
   @ValidateNested({each: true})
   @IsOptional()
   categories?: SupportCategory[];
+
+  @IsString({each: true})
+  @IsArray()
+  plugins: string[];
 }
