@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.5...v1.4.6) (2023-04-14)
+
+
+### Bug Fixes
+
+* multiple translation paths ([24774f1](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/24774f1bc2b030985d799a2d7669a6ec116a26a1))
+
 ## [1.4.5](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.4...v1.4.5) (2023-04-14)
 
 
