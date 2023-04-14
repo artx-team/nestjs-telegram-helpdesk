@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.2...v1.4.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* built-in entities and migrations ([f399aa7](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/f399aa786058b530febba349cb5b61686382e73b))
+
 ## [1.4.2](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.1...v1.4.2) (2023-04-13)
 
 
