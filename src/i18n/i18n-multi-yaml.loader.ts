@@ -97,7 +97,7 @@ export class I18nMultiYamlLoader extends I18nYamlLoader {
     const langs = [];
 
     for (let i = 0; i < this.opts.paths.length; i++) {
-      const i18nPath = normalize(this.opts.paths + sep);
+      const i18nPath = normalize(this.opts.paths[i] + sep);
       const got = (await getDirectories(i18nPath)).map(dir => relative(i18nPath, dir));
       got.forEach(lang => {
         if (!langs.includes(lang)) {
