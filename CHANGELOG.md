@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.4...v1.4.5) (2023-04-14)
+
+
+### Bug Fixes
+
+* add next functions ([e653e7f](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/e653e7fead6f262fafd81ee08ff4478a5bf13170))
+
 ## [1.4.4](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.3...v1.4.4) (2023-04-14)
 
 
