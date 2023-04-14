@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.3...v1.4.4) (2023-04-14)
+
+
+### Bug Fixes
+
+* expose settings ([b871805](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/b8718055caba1fedc9a48fc22dca419f76f67772))
+
 ## [1.4.3](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.2...v1.4.3) (2023-04-14)
 
 
