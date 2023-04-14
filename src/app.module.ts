@@ -3,15 +3,16 @@ import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} 
 import {CqrsModule} from '@nestjs/cqrs';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import type {Queue} from 'bull';
-import {HeaderResolver, I18nModule, I18nYamlLoader} from 'nestjs-i18n';
+import {HeaderResolver, I18nModule} from 'nestjs-i18n';
 import {TelegrafModule} from 'nestjs-telegraf';
 import PostgresSession from 'telegraf-postgres-session';
 
 import * as console from 'console';
-import path from 'path';
+import {join} from 'path';
 
 import {AppUpdate} from './app.update';
 
+import {I18nMultiYamlLoader} from '@/i18n/i18n-multi-yaml.loader';
 import {OrmModule} from '@/orm/orm.module';
 import {plugins} from '@/plugins';
 import {AppProcessor} from '@/processors/app.processor';
@@ -74,9 +75,12 @@ const {db} = settings;
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
-        path: path.join(__dirname, '/i18n/'),
+        paths: [
+          join(__dirname, '/i18n/'),
+          ...settings.i18n,
+        ],
       },
-      loader: I18nYamlLoader,
+      loader: I18nMultiYamlLoader,
       resolvers: [
         new HeaderResolver(['lang']),
       ],

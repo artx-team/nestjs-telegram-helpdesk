@@ -81,4 +81,8 @@ export class Settings {
   @IsString({each: true})
   @IsArray()
   plugins: string[];
+
+  @IsString({each: true})
+  @IsArray()
+  i18n: string[];
 }
