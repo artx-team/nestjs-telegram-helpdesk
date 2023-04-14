@@ -1,6 +1,8 @@
 import {EventBus} from '@nestjs/cqrs';
 import {Command, Ctx, Hears, Next, On, Update, Use} from 'nestjs-telegraf';
 
+import {NextFunction} from './next-function';
+
 import {OnTelegramMessageEvent} from '@/events/impl/on-telegram-message.event';
 import {FileType} from '@/file-type';
 import {HelpdeskContext} from '@/helpdesk-context';
@@ -18,8 +20,8 @@ export class AppUpdate {
   @Use()
   async checkPermissions(
     @Ctx() ctx: HelpdeskContext,
-    @Next() next,
-  ): Promise<boolean> {
+    @Next() next: NextFunction,
+  ): Promise<void> {
     if (ctx.session.categoryId && !this.ticketService.categories.some(c => c.id === ctx.session.categoryId)) {
       delete ctx.session.categoryId;
     }
@@ -44,65 +46,92 @@ export class AppUpdate {
   @Command('id')
   async findId(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await ctx.reply(ctx.from.id + ' ' + ctx.chat.id);
+
+    return next();
   }
 
   @Command('cat')
   async sendCurrentCategory(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.ticketService.sendCurrentCategory(ctx);
+
+    return next();
   }
 
   @Command('close')
   async closeTicket(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.ticketService.closeTicket(ctx);
+
+    return next();
   }
 
   @Command('reopen')
   async reopenTicket(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.ticketService.reopenTicket(ctx);
+
+    return next();
   }
 
   @Command('clear')
   async closeAllTickets(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.ticketService.closeAllTickets(ctx);
+
+    return next();
   }
 
   @Hears(/^\/start ?(.*)/)
   async start(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     const category = ctx.match[1];
     await this.ticketService.start(ctx, category);
+
+    return next();
   }
 
   @Hears(/^(?!(\/start ))(.+)/)
   async hearsMessages(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.handleMessage(ctx);
+
+    return next();
   }
 
   @On([FileType.Photo, FileType.Video, FileType.Document])
   async onPhoto(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.handleMessage(ctx);
+
+    return next();
   }
 
   @On('sticker')
   async handleSticker(
     @Ctx() ctx: HelpdeskContext,
+    @Next() next: NextFunction,
   ): Promise<void> {
     await this.handleMessage(ctx);
+
+    return next();
   }
 
   private async handleMessage(ctx: HelpdeskContext): Promise<void> {

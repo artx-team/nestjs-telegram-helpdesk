@@ -1,4 +1,5 @@
 import {validateSync} from 'class-validator';
+
 import {SETTINGS_PARSING_ERROR} from './settings-parsing-error';
 
 export function validateSettings<T extends object>(settings: T): T {

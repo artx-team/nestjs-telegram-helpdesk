@@ -1,5 +1,6 @@
 import {BullModule, InjectQueue} from '@nestjs/bull';
 import {Module, OnApplicationShutdown, OnModuleDestroy, OnModuleInit, Optional} from '@nestjs/common';
+import {CqrsModule} from '@nestjs/cqrs';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import type {Queue} from 'bull';
 import {HeaderResolver, I18nModule, I18nYamlLoader} from 'nestjs-i18n';
@@ -21,7 +22,6 @@ import {StaffService} from '@/staff.service';
 import {Message} from '@/ticket/message.entity';
 import {Ticket} from '@/ticket/ticket.entity';
 import {TicketService} from '@/ticket/ticket.service';
-import {CqrsModule} from '@nestjs/cqrs';
 
 const {db} = settings;
 

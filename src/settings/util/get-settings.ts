@@ -1,8 +1,9 @@
-import {plainToInstance} from 'class-transformer';
-import {validateSettings} from './validate-settings';
-import {SETTINGS_PARSING_ERROR} from './settings-parsing-error';
-import {parseYml} from './parse-yml';
 import {Type} from '@nestjs/common';
+import {plainToInstance} from 'class-transformer';
+
+import {parseYml} from './parse-yml';
+import {SETTINGS_PARSING_ERROR} from './settings-parsing-error';
+import {validateSettings} from './validate-settings';
 
 export function getSettings<T extends object>(settingsFilePath: string, type: Type<T>): T {
   let settings = parseYml(settingsFilePath);

@@ -46,7 +46,7 @@ module.exports = {
           "protected-instance-field",
           "protected-abstract-field",
           "private-instance-field",
-          "private-abstract-field",
+
           "public-field",
           "instance-field",
           "protected-field",
