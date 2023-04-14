@@ -12,10 +12,16 @@ const config: DataSourceOptions = {
   username: db.username,
   password: db.password,
   database: db.database,
-  entities: db.entities,
+  entities: [
+    __dirname + '/**/*.entity{.ts,.js}',
+    ...db.entities,
+  ],
   synchronize: false,
   migrationsTableName: 'migration',
-  migrations: db.migrations,
+  migrations: [
+    __dirname + '/migrations/**/*{.ts,.js}',
+    ...db.migrations,
+  ],
   logging: false,
   namingStrategy: new SnakeNamingStrategy(),
 };
