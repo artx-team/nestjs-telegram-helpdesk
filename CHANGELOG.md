@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.6...v1.4.7) (2023-04-14)
+
+
+### Bug Fixes
+
+* import plugins relative to process dir ([73d5205](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/73d520572d0439c7980d5d9b783db1d20b3d7320))
+
 ## [1.4.6](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.5...v1.4.6) (2023-04-14)
 
 
