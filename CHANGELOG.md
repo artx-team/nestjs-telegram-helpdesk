@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.7...v1.4.8) (2023-04-14)
+
+
+### Bug Fixes
+
+* translations path ([a4bd236](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/a4bd2363258c33d6242975a5778d97efa002f344))
+
 ## [1.4.7](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.6...v1.4.7) (2023-04-14)
 
 
