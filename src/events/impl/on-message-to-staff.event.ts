@@ -13,6 +13,7 @@ export class OnMessageToStaffEvent {
   constructor(
     public readonly ticketId: string,
     public readonly username: string,
+    public readonly originalMessage: string,
     public readonly ctx: HelpdeskContext,
   ) { }
 

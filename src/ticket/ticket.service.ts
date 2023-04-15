@@ -292,10 +292,12 @@ export class TicketService {
     }
 
     // get text from message
-    const originalMessage = TicketService.getMessageText(ctx);
+    let originalMessage = TicketService.getMessageText(ctx);
 
     // create message in database
     await this.createMessage(ticket.id, originalMessage, ctx.message.from);
+
+    originalMessage = TicketService.escapeSpecialChars(originalMessage);
 
     const ticketId = `#T${ticket.id.toString().padStart(6, '0')}`;
 
@@ -308,7 +310,7 @@ export class TicketService {
     }
 
     // custom message from plugins
-    const hook = new OnMessageToStaffEvent(ticketId, username, ctx);
+    const hook = new OnMessageToStaffEvent(ticketId, username, originalMessage, ctx);
     this.eventBus.publish(hook);
 
     let message: string | null = await hook.getResult();
@@ -320,7 +322,7 @@ export class TicketService {
           id: ticketId,
           username,
           lang: ctx.message.from.language_code,
-          message: TicketService.escapeSpecialChars(originalMessage),
+          message: originalMessage,
         },
       });
     }
