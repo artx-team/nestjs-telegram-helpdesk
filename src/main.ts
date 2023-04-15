@@ -4,6 +4,7 @@ import {loadPlugins} from '@/plugins';
 
 export * from './settings/util';
 export * from './events/impl/on-telegram-message.event';
+export * from './events/impl/on-message-to-staff.event';
 export * from './next-function';
 export * from './helpdesk-context';
 

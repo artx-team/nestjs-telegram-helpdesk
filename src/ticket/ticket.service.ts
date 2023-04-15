@@ -1,4 +1,5 @@
 import {Injectable} from '@nestjs/common';
+import {EventBus} from '@nestjs/cqrs';
 import {InjectRepository} from '@nestjs/typeorm';
 import {I18nService} from 'nestjs-i18n';
 import {InjectBot} from 'nestjs-telegraf';
@@ -8,6 +9,7 @@ import {Repository, Raw} from 'typeorm';
 import {UpdateResult} from 'typeorm/query-builder/result/UpdateResult';
 
 import {SupportCategory} from '@/dto/support-category';
+import {OnMessageToStaffEvent} from '@/events/impl/on-message-to-staff.event';
 import {HelpdeskContext} from '@/helpdesk-context';
 import settings from '@/settings';
 import {Message} from '@/ticket/message.entity';
@@ -55,6 +57,7 @@ export class TicketService {
     @InjectRepository(Ticket) private readonly ticketRepository: Repository<Ticket>,
     @InjectRepository(Message) private readonly messageRepository: Repository<Message>,
     private readonly i18n: I18nService,
+    private readonly eventBus: EventBus,
   ) { }
 
   /**
@@ -294,6 +297,8 @@ export class TicketService {
     // create message in database
     await this.createMessage(ticket.id, originalMessage, ctx.message.from);
 
+    const ticketId = `#T${ticket.id.toString().padStart(6, '0')}`;
+
     let username = `${TicketService.escapeSpecialChars(ctx.message.from.first_name)}`;
     if (ctx.message.from.last_name) {
       username += ` ${TicketService.escapeSpecialChars(ctx.message.from.last_name)}`;
@@ -302,15 +307,23 @@ export class TicketService {
       username = `<a href="tg://user?id=${ctx.message.from.id}">${username}</a>`;
     }
 
-    const message = await this.i18n.t(`message.ticket from`, {
-      lang: ctx.message.from.language_code,
-      args: {
-        id: `#T${ticket.id.toString().padStart(6, '0')}`,
-        username,
+    // custom message from plugins
+    const hook = new OnMessageToStaffEvent(ticketId, username, ctx);
+    this.eventBus.publish(hook);
+
+    let message: string | null = await hook.getResult();
+
+    if (message == null) {
+      message = await this.i18n.t(`message.ticket from`, {
         lang: ctx.message.from.language_code,
-        message: TicketService.escapeSpecialChars(originalMessage),
-      },
-    });
+        args: {
+          id: ticketId,
+          username,
+          lang: ctx.message.from.language_code,
+          message: TicketService.escapeSpecialChars(originalMessage),
+        },
+      });
+    }
 
     // send ticket message to main staff chat
     await this.sendMessage(settings.staffChatId, message, ctx, true);
