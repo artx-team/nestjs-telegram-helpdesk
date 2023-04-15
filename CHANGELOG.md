@@ -1,3 +1,10 @@
+## [1.4.11](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.10...v1.4.11) (2023-04-15)
+
+
+### Bug Fixes
+
+* skip commands in message handler ([fadb771](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/fadb7713456384778f23b650e6f7e70276dc311e))
+
 ## [1.4.10](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.9...v1.4.10) (2023-04-15)
 
 
