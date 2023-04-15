@@ -1,3 +1,10 @@
+## [1.4.9](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.8...v1.4.9) (2023-04-15)
+
+
+### Bug Fixes
+
+* hook to format a custom message to staff ([558b86e](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/558b86ec18979d58590d0d2995d8fe2754786e34))
+
 ## [1.4.8](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.7...v1.4.8) (2023-04-14)
 
 
