@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.9...v1.4.10) (2023-04-15)
+
+
+### Bug Fixes
+
+* add original message to event ([cc3870a](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/cc3870aea14c04d987ceaf7ae1e30e9b7b6b0724))
+
 ## [1.4.9](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.8...v1.4.9) (2023-04-15)
 
 
