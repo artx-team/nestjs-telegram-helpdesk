@@ -7,6 +7,7 @@ import {OnTelegramMessageEvent} from '@/events/impl/on-telegram-message.event';
 import {FileType} from '@/file-type';
 import {HelpdeskContext} from '@/helpdesk-context';
 import settings from '@/settings';
+import {TelegramCommand} from '@/telegram-command.enum';
 import {TicketService} from '@/ticket/ticket.service';
 
 @Update()
@@ -43,7 +44,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command('id')
+  @Command(TelegramCommand.Id)
   async findId(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,
@@ -53,7 +54,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command('cat')
+  @Command(TelegramCommand.Cat)
   async sendCurrentCategory(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,
@@ -63,7 +64,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command('close')
+  @Command(TelegramCommand.Close)
   async closeTicket(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,
@@ -73,7 +74,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command('reopen')
+  @Command(TelegramCommand.Reopen)
   async reopenTicket(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,
@@ -83,7 +84,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command('clear')
+  @Command(TelegramCommand.Close)
   async closeAllTickets(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,

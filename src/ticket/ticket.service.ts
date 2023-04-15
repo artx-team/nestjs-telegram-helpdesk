@@ -15,6 +15,7 @@ import settings from '@/settings';
 import {Message} from '@/ticket/message.entity';
 import {TicketStatus} from '@/ticket/ticket-status';
 import {Ticket} from '@/ticket/ticket.entity';
+import { TelegramCommand } from '@/telegram-command.enum';
 
 @Injectable()
 export class TicketService {
@@ -114,6 +115,11 @@ export class TicketService {
    * @param ctx
    */
   async handleMessage(ctx: HelpdeskContext): Promise<void> {
+    // don't handle commands
+    if (Object.values(TelegramCommand).some(command => `/${command}` === ('text' in ctx.message && ctx.message.text))) {
+      return;
+    }
+
     try {
       if (ctx.chat.type === 'private') {
         await this.userChat(ctx);
