@@ -84,7 +84,7 @@ export class AppUpdate {
     return next();
   }
 
-  @Command(TelegramCommand.Close)
+  @Command(TelegramCommand.Clear)
   async closeAllTickets(
     @Ctx() ctx: HelpdeskContext,
     @Next() next: NextFunction,
