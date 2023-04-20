@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.11...v1.4.12) (2023-04-20)
+
+
+### Bug Fixes
+
+* clear to close all tickets ([a05bddb](https://github.com/artx-team/nestjs-telegram-helpdesk/commit/a05bddb1f6b66c442484dcebe30e4a77c51704fd))
+
 ## [1.4.11](https://github.com/artx-team/nestjs-telegram-helpdesk/compare/v1.4.10...v1.4.11) (2023-04-15)
 
 

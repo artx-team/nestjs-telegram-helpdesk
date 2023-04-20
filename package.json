@@ -1,6 +1,6 @@
 {
   "name": "nestjs-telegram-helpdesk",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "Telegram Helpdesk Bot",
   "author": "kovalenko",
   "license": "MIT",
